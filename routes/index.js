@@ -26,6 +26,12 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/todo', function(req, res) {
+  request(base + 'todo.txt', function(err, resp, body) {
+    res.render('note', { title: 'todo', markdown: md.render(body) });
+  });
+});
+
 router.get('/:category/:name', function(req, res) {
   var url = base + req.params.category + 'x-' + req.params.name + '.txt';
   request(url, function(err, resp, body) {
