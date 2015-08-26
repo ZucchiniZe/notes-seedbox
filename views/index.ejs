@@ -13,7 +13,7 @@
     <h3>List Of My Notes</h3>
     <ul>
     <% for (var i = 0; i < notes.length; i++) { %>
-      <li><a href="<%= notes[i].slug %>"><%= notes[i].name %></a></li>
+      <li><a href="<%= notes[i].slug %>"><%= notes[i].name %></a> [<%= notes[i].category %>]</li>
     <% } %>
     </ul>
   </body>
