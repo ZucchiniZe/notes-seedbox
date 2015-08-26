@@ -7,8 +7,23 @@ var router = express.Router();
 var base = "http://zucchinize.epsilon.bysh.me/notes/";
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
+router.get('/', function(req, res) {
+  var category = /.+?(?=x-)/
+  var name = /(?=x-)(.*?)(?=\.)/
+  var notes = []
+  request(base + 'json.php', function(err, resp, body) {
+    var json = JSON.parse(body)
+    for (var i = 0; i < json.length; i++) {
+      var note = {
+        url: json[i].match(name)[0].substring(2),
+        name: json[i].match(name)[0].substring(2).replace(/-/g, ' '),
+        category: json[i].match(category)[0]
+      };
+      note.slug = note.category + '/' + note.url
+      notes.push(note)
+    }
+    res.render('index', { notes: notes })
+  });
 });
 
 router.get('/:category/:name', function(req, res) {

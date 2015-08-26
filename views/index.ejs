@@ -3,9 +3,17 @@
   <head>
     <title>notes</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   <body>
     <h1>You have reached my notes.</h1>
     <p>This is a easy way to view my markdown notes for school and other things.</p>
+    <hr>
+    <h3>List Of My Notes</h3>
+    <ul>
+    <% for (var i = 0; i < notes.length; i++) { %>
+      <li><a href="<%= notes[i].slug %>"><%= notes[i].name %></a></li>
+    <% } %>
+    </ul>
   </body>
 </html>
